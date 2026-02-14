@@ -3,53 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Quieres ser mi San Valentín? 💘</title>
+<title>San Valentín 💘</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
     margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 40px 20px;
     background: #f8c8dc;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    overflow: hidden;
-    padding: 20px;
-    transition: background 0.5s ease;
-}
-
-.card {
-    background: white;
-    padding: 35px 25px;
-    border-radius: 20px;
+    font-family: Arial, sans-serif;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    width: 100%;
-    max-width: 420px;
-    z-index: 2;
-    animation: fadeIn 1s ease;
+    overflow-y: auto;
 }
 
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+
+h1, p {
+    color: black;
+}
+
+/* ✨ FOTO CON BRILLO */
 .photo {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 4px solid #ff4d88;
+    width: 100%;
+    max-width: 250px;
+    border-radius: 20px;
+    margin: 20px 0;
+    animation: glow 2s infinite alternate;
 }
 
-h1 {
-    color: #d63384;
-    font-size: 22px;
-}
-
-p {
-    color: #555;
-    font-size: 15px;
+@keyframes glow {
+    from { box-shadow: 0 0 10px #ff4d88; }
+    to { box-shadow: 0 0 30px #ff4d88, 0 0 60px #ff99cc; }
 }
 
 .buttons {
@@ -61,7 +47,7 @@ p {
 button {
     flex: 1;
     padding: 15px;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -74,61 +60,46 @@ button {
 }
 
 #no {
-    background: #999;
-    color: white;
+    background: #ffffff;
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+#result {
+    margin-top: 25px;
+    font-weight: bold;
+    color: black;
 }
 
 .whatsapp-btn {
+    display: inline-block;
     margin-top: 15px;
+    padding: 12px 20px;
     background: #25D366;
     color: white;
-    padding: 14px;
-    border-radius: 12px;
-    display: inline-block;
     text-decoration: none;
-    font-weight: bold;
-    width: 100%;
-}
-
-.hidden { display: none; }
-
-/* PLAYER */
-.player {
-    margin-top: 15px;
-    background: #ffe6f0;
-    padding: 15px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.song-title {
-    font-size: 14px;
-    color: #d63384;
-    font-weight: bold;
-}
-
-#playPause {
-    background: #ff4d88;
-    color: white;
-    border: none;
-    padding: 10px;
     border-radius: 10px;
-    font-size: 18px;
+}
+
+/* 🎵 Player */
+.player {
+    margin-top: 30px;
 }
 
 #progress {
     width: 100%;
 }
 
-/* Confeti */
+/* 🎉 Confeti */
 .confetti {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    top: 0;
-    animation: fall 3s linear forwards;
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear forwards;
 }
 
 @keyframes fall {
@@ -138,49 +109,56 @@ button {
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ⏳ Contador */
+.countdown {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
+<div class="container">
 
-    <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
-    <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
+<h1>¿Quieres ser mi San Valentín? U3U 💕</h1>
 
-    <div class="player">
-        <div class="song-title">🎶 I.L.Y. - The Rose</div>
-        <button id="playPause">▶️</button>
-        <input type="range" id="progress" value="0" min="0" max="100">
-    </div>
+<p>Tendrás un día lleno de tu música favorita y rica comida chiqui 🥰</p>
 
-    <div class="buttons">
-        <button id="yes">Sí 🥰</button>
-        <button id="no">No 🧐💀</button>
-    </div>
+<img src="foto.jpg" alt="Nuestra foto" class="photo">
 
-    <div id="result"></div>
+<div class="buttons">
+    <button id="yes">Sí 🥰</button>
+    <button id="no">No 😅</button>
 </div>
 
-<audio id="music">
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div id="result"></div>
+
+<div id="countdown" class="countdown"></div>
+
+<!-- 🎵 Música -->
+<div class="player">
+    <audio id="music" src="musica.mp3"></audio>
+    <button id="playPause">▶️</button>
+    <input type="range" id="progress" value="0" min="0" max="100">
+</div>
+
+</div>
 
 <script>
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
 const result = document.getElementById('result');
+const countdownEl = document.getElementById("countdown");
 const music = document.getElementById('music');
 const playPauseBtn = document.getElementById("playPause");
 const progress = document.getElementById("progress");
 
 let scale = 1;
 let cryCount = 1;
+let countdownInterval;
 
 /* BOTÓN NO */
 noBtn.addEventListener('click', () => {
@@ -189,8 +167,9 @@ noBtn.addEventListener('click', () => {
     yesBtn.style.flex = scale;
 
     let cryingFaces = "😭".repeat(cryCount);
+
     result.innerHTML = `
-        <p style="margin-top:20px; font-weight:bold; color:black;">
+        <p>
             Oye 😡 ${cryingFaces}
         </p>
     `;
@@ -213,21 +192,53 @@ yesBtn.addEventListener('click', () => {
     }
 
     launchConfetti();
+    startCountdown();
 
     result.innerHTML = `
-        <p style="margin-top:20px; font-weight:bold; color:black;">
+        <p>
             Buena elección jiji 😌💘<br>
-            No faltes uwu
+            Envía confirmación
         </p>
         <a class="whatsapp-btn" 
            href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
            target="_blank">
-           Enviar confirmación por WhatsApp 💌
+           Enviar confirmación 💌
         </a>
     `;
 });
 
-/* PLAYER */
+/* ⏳ CONTADOR (SOLO CUANDO PRESIONA SÍ) */
+function startCountdown() {
+
+    clearInterval(countdownInterval);
+
+    countdownInterval = setInterval(() => {
+
+        const now = new Date();
+
+        const target = new Date();
+        target.setDate(now.getDate() + 1);
+        target.setHours(15, 0, 0, 0);
+
+        const diff = target - now;
+
+        if (diff <= 0) {
+            countdownEl.innerHTML = "Es hoyyy 😳💘 ¡Nos vemos a las 3:00!";
+            clearInterval(countdownInterval);
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownEl.innerHTML =
+            `Faltan ${hours}h ${minutes}m ${seconds}s para nuestra cita 😳💖`;
+
+    }, 1000);
+}
+
+/* 🎵 PLAYER */
 playPauseBtn.addEventListener("click", () => {
     if (music.paused) {
         music.play();
@@ -248,7 +259,7 @@ progress.addEventListener("input", () => {
     music.currentTime = time;
 });
 
-/* Confeti */
+/* 🎉 Confeti */
 function launchConfetti() {
     for (let i = 0; i < 80; i++) {
         const confetti = document.createElement("div");
