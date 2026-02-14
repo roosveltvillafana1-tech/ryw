@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Quieres salir conmigo? 💘</title>
+<title>¿Quieres ser mi San Valentín? 💘</title>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         height: 100vh;
@@ -15,40 +19,44 @@
         background: #f8c8dc; /* rosado palo */
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         overflow: hidden;
+        padding: 20px;
     }
 
     .card {
         background: white;
-        padding: 40px 30px;
+        padding: 40px 25px;
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        width: 90%;
-        max-width: 400px;
+        width: 100%;
+        max-width: 420px;
         position: relative;
         z-index: 2;
         animation: fadeIn 1s ease;
     }
 
     h1 {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         color: #d63384;
+        font-size: 22px;
     }
 
     p {
         margin-bottom: 30px;
         color: #555;
+        font-size: 15px;
     }
 
     .buttons {
         display: flex;
         gap: 15px;
+        width: 100%;
     }
 
     button {
         flex: 1;
         padding: 15px;
-        font-size: 18px;
+        font-size: 16px;
         border: none;
         border-radius: 12px;
         cursor: pointer;
@@ -65,12 +73,20 @@
         color: white;
     }
 
-    .full {
-        width: 100% !important;
-    }
-
     .hidden {
         display: none;
+    }
+
+    .whatsapp-btn {
+        margin-top: 20px;
+        background: #25D366;
+        color: white;
+        padding: 14px;
+        border-radius: 12px;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: bold;
+        width: 100%;
     }
 
     @keyframes fadeIn {
@@ -78,21 +94,22 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* corazones flotando */
+    /* Corazones */
     .heart {
         position: absolute;
-        font-size: 20px;
+        font-size: 18px;
         animation: float 6s infinite linear;
-        opacity: 0.6;
+        opacity: 0.5;
     }
 
     @keyframes float {
-        from {
-            transform: translateY(100vh) scale(1);
-        }
-        to {
-            transform: translateY(-10vh) scale(1.5);
-        }
+        from { transform: translateY(100vh); }
+        to { transform: translateY(-10vh); }
+    }
+
+    @media (max-width: 400px) {
+        h1 { font-size: 20px; }
+        p { font-size: 14px; }
     }
 </style>
 </head>
@@ -100,15 +117,15 @@
 <body>
 
 <div class="card">
-    <h1>¿Quieres salir conmigo? 💖</h1>
-    <p>Prometo buena conversación, risas y algo dulce después 🍫✨</p>
+    <h1>¿Quieres ser mi San Valentín? U3U </h1>
+    <p>Tendrás un día llena de tu música favorita jeje y rica comida chiqui 🥵</p>
 
     <div class="buttons">
-        <button id="yes">Sí 💕</button>
-        <button id="no">No 🙈</button>
+        <button id="yes">Sí 🥰</button>
+        <button id="no">No 💀</button>
     </div>
 
-    <p id="result" style="margin-top:20px; font-weight:bold; color:#d63384;"></p>
+    <div id="result"></div>
 </div>
 
 <script>
@@ -124,15 +141,23 @@
 
         if (scale >= 5) {
             noBtn.classList.add('hidden');
-            yesBtn.classList.add('full');
+            yesBtn.style.width = "100%";
         }
     });
 
     yesBtn.addEventListener('click', () => {
-        result.innerText = "Sabía que dirías que sí 😍🌹 Te escribo para coordinar 💌";
+        result.innerHTML = `
+            <p style="margin-top:20px; font-weight:bold; color:#d63384;">
+                Buena elección jiji, envía confirmación mejeje
+            </p>
+            <a class="whatsapp-btn" 
+               href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
+               target="_blank">
+               Enviar confirmación por WhatsApp 💌
+            </a>
+        `;
     });
 
-    // Crear corazones flotando
     function createHeart() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
