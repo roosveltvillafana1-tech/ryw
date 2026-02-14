@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Quieres ser mi San Valentín? 💘</title>
+<title>¿Quieres ser mi San Valentín, Croqueta? 💘</title>
 
 <style>
     * {
