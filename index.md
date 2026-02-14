@@ -9,13 +9,13 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;   /* antes era height */
     display: flex;
     justify-content: center;
     align-items: center;
     background: #f8c8dc;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    overflow: hidden;
+    overflow-y: auto;    
     padding: 20px;
     transition: background 0.5s ease;
 }
