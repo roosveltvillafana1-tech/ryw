@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -69,7 +70,7 @@ button {
 
 #yes {
     background: #ff4d88;
-    color: white;
+    color: black;
 }
 
 #no {
@@ -91,7 +92,7 @@ button {
 
 .hidden { display: none; }
 
-/* 🎵 PLAYER */
+/* PLAYER */
 .player {
     margin-top: 15px;
     background: #ffe6f0;
@@ -149,10 +150,9 @@ button {
 <div class="card">
     <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
 
-    <h1>¿Quieres ser mi San Valentín, Croqueta? U3U </h1>
+    <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
-    <!-- 🎵 REPRODUCTOR -->
     <div class="player">
         <div class="song-title">🎶 I.L.Y. - The Rose</div>
         <button id="playPause">▶️</button>
@@ -180,11 +180,22 @@ const playPauseBtn = document.getElementById("playPause");
 const progress = document.getElementById("progress");
 
 let scale = 1;
+let cryCount = 1;
 
-/* Botón NO hace crecer el Sí */
+/* BOTÓN NO */
 noBtn.addEventListener('click', () => {
+
     scale += 0.4;
     yesBtn.style.flex = scale;
+
+    let cryingFaces = "😭".repeat(cryCount);
+    result.innerHTML = `
+        <p style="margin-top:20px; font-weight:bold; color:black;">
+            Oye 😡 ${cryingFaces}
+        </p>
+    `;
+
+    cryCount++;
 
     if (scale >= 5) {
         noBtn.classList.add('hidden');
@@ -192,7 +203,7 @@ noBtn.addEventListener('click', () => {
     }
 });
 
-/* Botón SÍ */
+/* BOTÓN SÍ */
 yesBtn.addEventListener('click', () => {
 
     document.body.style.background = "#ff4d88";
@@ -204,7 +215,7 @@ yesBtn.addEventListener('click', () => {
     launchConfetti();
 
     result.innerHTML = `
-        <p style="margin-top:20px; font-weight:bold; color:white;">
+        <p style="margin-top:20px; font-weight:bold; color:black;">
             Buena elección jiji 😌💘<br>
             No faltes uwu
         </p>
@@ -216,7 +227,7 @@ yesBtn.addEventListener('click', () => {
     `;
 });
 
-/* 🎵 PLAYER LOGIC */
+/* PLAYER */
 playPauseBtn.addEventListener("click", () => {
     if (music.paused) {
         music.play();
