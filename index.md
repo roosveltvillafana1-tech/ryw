@@ -1,4 +1,3 @@
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -78,13 +77,6 @@ button {
     color: white;
 }
 
-.music-btn {
-    margin-top: 15px;
-    background: #6c5ce7;
-    color: white;
-    width: 100%;
-}
-
 .whatsapp-btn {
     margin-top: 15px;
     background: #25D366;
@@ -99,9 +91,34 @@ button {
 
 .hidden { display: none; }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 🎵 PLAYER */
+.player {
+    margin-top: 15px;
+    background: #ffe6f0;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.song-title {
+    font-size: 14px;
+    color: #d63384;
+    font-weight: bold;
+}
+
+#playPause {
+    background: #ff4d88;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+#progress {
+    width: 100%;
 }
 
 /* Confeti */
@@ -109,7 +126,6 @@ button {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: red;
     top: 0;
     animation: fall 3s linear forwards;
 }
@@ -119,6 +135,11 @@ button {
         transform: translateY(100vh) rotate(720deg);
         opacity: 0;
     }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -131,7 +152,12 @@ button {
     <h1>¿Quieres ser mi San Valentín, Croqueta? U3U </h1>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
-    <button class="music-btn" onclick="toggleMusic()">🎵 Activar música</button>
+    <!-- 🎵 REPRODUCTOR -->
+    <div class="player">
+        <div class="song-title">🎶 I.L.Y. - The Rose</div>
+        <button id="playPause">▶️</button>
+        <input type="range" id="progress" value="0" min="0" max="100">
+    </div>
 
     <div class="buttons">
         <button id="yes">Sí 🥰</button>
@@ -141,7 +167,7 @@ button {
     <div id="result"></div>
 </div>
 
-<audio id="music" loop>
+<audio id="music">
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -150,10 +176,12 @@ const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
 const result = document.getElementById('result');
 const music = document.getElementById('music');
+const playPauseBtn = document.getElementById("playPause");
+const progress = document.getElementById("progress");
 
 let scale = 1;
-let musicPlaying = false;
 
+/* Botón NO hace crecer el Sí */
 noBtn.addEventListener('click', () => {
     scale += 0.4;
     yesBtn.style.flex = scale;
@@ -164,6 +192,7 @@ noBtn.addEventListener('click', () => {
     }
 });
 
+/* Botón SÍ */
 yesBtn.addEventListener('click', () => {
 
     document.body.style.background = "#ff4d88";
@@ -175,7 +204,7 @@ yesBtn.addEventListener('click', () => {
     launchConfetti();
 
     result.innerHTML = `
-        <p style="margin-top:20px; font-weight:bold;">
+        <p style="margin-top:20px; font-weight:bold; color:white;">
             Buena elección jiji 😌💘<br>
             No faltes uwu
         </p>
@@ -187,22 +216,34 @@ yesBtn.addEventListener('click', () => {
     `;
 });
 
-function toggleMusic() {
-    if (!musicPlaying) {
+/* 🎵 PLAYER LOGIC */
+playPauseBtn.addEventListener("click", () => {
+    if (music.paused) {
         music.play();
-        musicPlaying = true;
+        playPauseBtn.textContent = "⏸️";
     } else {
         music.pause();
-        musicPlaying = false;
+        playPauseBtn.textContent = "▶️";
     }
-}
+});
 
+music.addEventListener("timeupdate", () => {
+    const percent = (music.currentTime / music.duration) * 100;
+    progress.value = percent;
+});
+
+progress.addEventListener("input", () => {
+    const time = (progress.value / 100) * music.duration;
+    music.currentTime = time;
+});
+
+/* Confeti */
 function launchConfetti() {
     for (let i = 0; i < 80; i++) {
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");
         confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.background = 
+        confetti.style.background =
             ["#ff4d88", "#ff99cc", "#ffd6e8", "#ffffff"][Math.floor(Math.random()*4)];
         confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
         document.body.appendChild(confetti);
