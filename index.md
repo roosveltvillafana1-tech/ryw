@@ -32,13 +32,30 @@ body {
     animation: fadeIn 1s ease;
 }
 
+/* ✨ Efecto brillo romántico */
 .photo {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 4px solid #ff4d88;
+    width: 100%;
+    max-width: 250px;
+    border-radius: 20px;
+    margin: 20px 0;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #ff4d88;
+    }
+    to {
+        box-shadow: 0 0 30px #ff4d88, 0 0 60px #ff99cc;
+    }
+}
+
+/* ⏳ Contador */
+.countdown {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
 }
 
 h1 {
@@ -148,7 +165,7 @@ button {
 
 <div class="card">
     <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
-
+<div class="countdown" id="countdown"></div>
     <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
@@ -219,7 +236,7 @@ yesBtn.addEventListener('click', () => {
             No faltes uwu
         </p>
         <a class="whatsapp-btn" 
-           href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
+           href="https://wa.me/51988096303?text=Confirmo%20la%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
            target="_blank">
            Enviar confirmación por WhatsApp 💌
         </a>
@@ -263,6 +280,32 @@ function launchConfetti() {
         }, 3000);
     }
 }
+    /* ⏳ CONTADOR HASTA MAÑANA 3:00 PM */
+function updateCountdown() {
+    const now = new Date();
+
+    const target = new Date();
+    target.setDate(now.getDate() + 1);
+    target.setHours(15, 0, 0, 0);
+
+    const diff = target - now;
+
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML =
+            "Es hoyyy 😳💘 ¡Nos vemos a las 3:00!";
+        return;
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        `Faltan ${hours}h ${minutes}m ${seconds}s para nuestra cita 😳💖`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 </script>
 
 </body>
