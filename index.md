@@ -1,81 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Aceptas?</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres salir conmigo? 💘</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f5f5;
-        }
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f8c8dc; /* rosado palo */
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: hidden;
+    }
 
-        h1 {
-            margin-bottom: 30px;
-        }
+    .card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+        z-index: 2;
+        animation: fadeIn 1s ease;
+    }
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            width: 90%;
-            max-width: 400px;
-        }
+    h1 {
+        margin-bottom: 10px;
+        color: #d63384;
+    }
 
-        button {
-            flex: 1;
-            padding: 16px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    p {
+        margin-bottom: 30px;
+        color: #555;
+    }
 
-        #yes {
-            background-color: #4CAF50;
-            color: white;
-        }
+    .buttons {
+        display: flex;
+        gap: 15px;
+    }
 
-        #no {
-            background-color: #f44336;
-            color: white;
+    button {
+        flex: 1;
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background: #ff4d88;
+        color: white;
+    }
+
+    #no {
+        background: #999;
+        color: white;
+    }
+
+    .full {
+        width: 100% !important;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* corazones flotando */
+    .heart {
+        position: absolute;
+        font-size: 20px;
+        animation: float 6s infinite linear;
+        opacity: 0.6;
+    }
+
+    @keyframes float {
+        from {
+            transform: translateY(100vh) scale(1);
         }
-    </style>
+        to {
+            transform: translateY(-10vh) scale(1.5);
+        }
+    }
+</style>
 </head>
+
 <body>
 
-    <h1>¿Aceptas?</h1>
+<div class="card">
+    <h1>¿Quieres salir conmigo? 💖</h1>
+    <p>Prometo buena conversación, risas y algo dulce después 🍫✨</p>
 
     <div class="buttons">
-        <button id="yes">Sí</button>
-        <button id="no">No</button>
+        <button id="yes">Sí 💕</button>
+        <button id="no">No 🙈</button>
     </div>
 
-    <script>
-        const yesBtn = document.getElementById('yes');
-        const noBtn = document.getElementById('no');
+    <p id="result" style="margin-top:20px; font-weight:bold; color:#d63384;"></p>
+</div>
 
-        let yesScale = 1;
+<script>
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
+    const result = document.getElementById('result');
 
-        noBtn.addEventListener('click', () => {
-            yesScale += 0.3;
-            yesBtn.style.flex = yesScale;
+    let scale = 1;
 
-            // Cuando el botón Sí ocupa casi todo el ancho
-            if (yesScale >= 5) {
-                noBtn.style.display = 'none';
-                yesBtn.style.flex = '1';
-                yesBtn.style.width = '100%';
-            }
-        });
-    </script>
+    noBtn.addEventListener('click', () => {
+        scale += 0.4;
+        yesBtn.style.flex = scale;
+
+        if (scale >= 5) {
+            noBtn.classList.add('hidden');
+            yesBtn.classList.add('full');
+        }
+    });
+
+    yesBtn.addEventListener('click', () => {
+        result.innerText = "Sabía que dirías que sí 😍🌹 Te escribo para coordinar 💌";
+    });
+
+    // Crear corazones flotando
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    setInterval(createHeart, 800);
+</script>
 
 </body>
 </html>
