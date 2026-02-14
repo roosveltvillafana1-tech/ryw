@@ -3,37 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentín 💘</title>
+<title>¿Quieres ser mi San Valentín? 💘</title>
 
 <style>
+* { box-sizing: border-box; }
+
 body {
     margin: 0;
-    padding: 40px 20px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #f8c8dc;
-    font-family: 'Arial', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: hidden;
+    padding: 20px;
+    transition: background 0.5s ease;
+}
+
+.card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 20px;
     text-align: center;
-    overflow-y: auto;
-}
-
-.container {
-    max-width: 500px;
-    margin: auto;
-}
-
-h1 {
-    color: #000;
-    font-size: 26px;
-}
-
-p {
-    color: #000;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 420px;
+    z-index: 2;
+    animation: fadeIn 1s ease;
 }
 
 .photo {
-    width: 100%;
-    max-width: 250px;
-    border-radius: 20px;
-    margin: 20px 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #ff4d88;
+}
+
+h1 {
+    color: #d63384;
+    font-size: 22px;
+}
+
+p {
+    color: #555;
+    font-size: 15px;
 }
 
 .buttons {
@@ -45,7 +61,7 @@ p {
 button {
     flex: 1;
     padding: 15px;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -58,46 +74,61 @@ button {
 }
 
 #no {
-    background: #ffffff;
-    color: black;
-}
-
-.hidden {
-    display: none;
-}
-
-#result {
-    margin-top: 25px;
-    font-weight: bold;
-    color: black;
+    background: #999;
+    color: white;
 }
 
 .whatsapp-btn {
-    display: inline-block;
     margin-top: 15px;
-    padding: 12px 20px;
     background: #25D366;
     color: white;
+    padding: 14px;
+    border-radius: 12px;
+    display: inline-block;
     text-decoration: none;
-    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
 }
 
-/* 🎵 Player */
+.hidden { display: none; }
+
+/* PLAYER */
 .player {
-    margin-top: 30px;
+    margin-top: 15px;
+    background: #ffe6f0;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.song-title {
+    font-size: 14px;
+    color: #d63384;
+    font-weight: bold;
+}
+
+#playPause {
+    background: #ff4d88;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 #progress {
     width: 100%;
 }
 
-/* 🎉 Confeti */
+/* Confeti */
 .confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    top: -10px;
-    animation: fall linear forwards;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    animation: fall 3s linear forwards;
 }
 
 @keyframes fall {
@@ -106,34 +137,39 @@ button {
         opacity: 0;
     }
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
+    <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
 
-<h1>¿Quieres ser mi San Valentín? U3U 💕</h1>
+    <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
+    <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
-<p>Tendrás un día lleno de tu música favorita y rica comida chiqui 🥰</p>
+    <div class="player">
+        <div class="song-title">🎶 I.L.Y. - The Rose</div>
+        <button id="playPause">▶️</button>
+        <input type="range" id="progress" value="0" min="0" max="100">
+    </div>
 
-<img src="foto.jpg" alt="Nuestra foto" class="photo">
+    <div class="buttons">
+        <button id="yes">Sí 🥰</button>
+        <button id="no">No 🧐💀</button>
+    </div>
 
-<div class="buttons">
-    <button id="yes">Sí 🥰</button>
-    <button id="no">No 😅</button>
+    <div id="result"></div>
 </div>
 
-<div id="result"></div>
-
-<!-- 🎵 Música -->
-<div class="player">
-    <audio id="music" src="musica.mp3"></audio>
-    <button id="playPause">▶️</button>
-    <input type="range" id="progress" value="0" min="0" max="100">
-</div>
-
-</div>
+<audio id="music">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const yesBtn = document.getElementById('yes');
@@ -153,9 +189,8 @@ noBtn.addEventListener('click', () => {
     yesBtn.style.flex = scale;
 
     let cryingFaces = "😭".repeat(cryCount);
-
     result.innerHTML = `
-        <p style="margin-top:20px;">
+        <p style="margin-top:20px; font-weight:bold; color:black;">
             Oye 😡 ${cryingFaces}
         </p>
     `;
@@ -180,19 +215,19 @@ yesBtn.addEventListener('click', () => {
     launchConfetti();
 
     result.innerHTML = `
-        <p>
+        <p style="margin-top:20px; font-weight:bold; color:black;">
             Buena elección jiji 😌💘<br>
-            Envía confirmación
+            No faltes uwu
         </p>
         <a class="whatsapp-btn" 
            href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
            target="_blank">
-           Enviar confirmación 💌
+           Enviar confirmación por WhatsApp 💌
         </a>
     `;
 });
 
-/* 🎵 PLAYER */
+/* PLAYER */
 playPauseBtn.addEventListener("click", () => {
     if (music.paused) {
         music.play();
@@ -213,7 +248,7 @@ progress.addEventListener("input", () => {
     music.currentTime = time;
 });
 
-/* 🎉 Confeti */
+/* Confeti */
 function launchConfetti() {
     for (let i = 0; i < 80; i++) {
         const confetti = document.createElement("div");
