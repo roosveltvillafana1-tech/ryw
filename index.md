@@ -126,7 +126,7 @@ button {
 <body>
 
 <div class="card">
-    <img src="foto.jpg" class="photo">
+    <img src="IMG_0942.jpeg" class="photo">
 
     <h1>¿Quieres ser mi San Valentín? U3U 💖</h1>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
