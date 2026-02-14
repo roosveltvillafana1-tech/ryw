@@ -164,7 +164,7 @@ button {
 <body>
 
 <div class="card">
-    <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
+    <img src="IMG_6512.jpeg" class="photo">
 
     <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
     <div class="countdown" id="countdown"></div>
