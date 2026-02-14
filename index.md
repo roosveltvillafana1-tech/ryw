@@ -175,7 +175,7 @@ yesBtn.addEventListener('click', () => {
     launchConfetti();
 
     result.innerHTML = `
-        <p style="margin-top:20px; font-weight:bold; color:white;">
+        <p style="margin-top:20px; font-weight:bold;">
             Buena elección jiji 😌💘<br>
             No faltes uwu
         </p>
