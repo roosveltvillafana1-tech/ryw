@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 40px 20px;
     background: #f8c8dc;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
     overflow-y: auto;
 }
@@ -20,22 +20,20 @@ body {
     margin: auto;
 }
 
-h1, p {
-    color: black;
+h1 {
+    color: #000;
+    font-size: 26px;
 }
 
-/* ✨ FOTO CON BRILLO */
+p {
+    color: #000;
+}
+
 .photo {
     width: 100%;
     max-width: 250px;
     border-radius: 20px;
     margin: 20px 0;
-    animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 10px #ff4d88; }
-    to { box-shadow: 0 0 30px #ff4d88, 0 0 60px #ff99cc; }
 }
 
 .buttons {
@@ -108,14 +106,6 @@ button {
         opacity: 0;
     }
 }
-
-/* ⏳ Contador */
-.countdown {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
 </style>
 </head>
 
@@ -136,8 +126,6 @@ button {
 
 <div id="result"></div>
 
-<div id="countdown" class="countdown"></div>
-
 <!-- 🎵 Música -->
 <div class="player">
     <audio id="music" src="musica.mp3"></audio>
@@ -151,14 +139,12 @@ button {
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
 const result = document.getElementById('result');
-const countdownEl = document.getElementById("countdown");
 const music = document.getElementById('music');
 const playPauseBtn = document.getElementById("playPause");
 const progress = document.getElementById("progress");
 
 let scale = 1;
 let cryCount = 1;
-let countdownInterval;
 
 /* BOTÓN NO */
 noBtn.addEventListener('click', () => {
@@ -169,7 +155,7 @@ noBtn.addEventListener('click', () => {
     let cryingFaces = "😭".repeat(cryCount);
 
     result.innerHTML = `
-        <p>
+        <p style="margin-top:20px;">
             Oye 😡 ${cryingFaces}
         </p>
     `;
@@ -192,7 +178,6 @@ yesBtn.addEventListener('click', () => {
     }
 
     launchConfetti();
-    startCountdown();
 
     result.innerHTML = `
         <p>
@@ -206,37 +191,6 @@ yesBtn.addEventListener('click', () => {
         </a>
     `;
 });
-
-/* ⏳ CONTADOR (SOLO CUANDO PRESIONA SÍ) */
-function startCountdown() {
-
-    clearInterval(countdownInterval);
-
-    countdownInterval = setInterval(() => {
-
-        const now = new Date();
-
-        const target = new Date();
-        target.setDate(now.getDate() + 1);
-        target.setHours(15, 0, 0, 0);
-
-        const diff = target - now;
-
-        if (diff <= 0) {
-            countdownEl.innerHTML = "Es hoyyy 😳💘 ¡Nos vemos a las 3:00!";
-            clearInterval(countdownInterval);
-            return;
-        }
-
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        countdownEl.innerHTML =
-            `Faltan ${hours}h ${minutes}m ${seconds}s para nuestra cita 😳💖`;
-
-    }, 1000);
-}
 
 /* 🎵 PLAYER */
 playPauseBtn.addEventListener("click", () => {
