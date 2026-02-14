@@ -165,8 +165,9 @@ button {
 
 <div class="card">
     <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
-<div class="countdown" id="countdown"></div>
+
     <h1>¿Quieres ser mi San Valentín, Croqueta? U3U</h1>
+    <div class="countdown" id="countdown"></div>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
     <div class="player">
@@ -301,7 +302,7 @@ function updateCountdown() {
     const seconds = Math.floor((diff / 1000) % 60);
 
     document.getElementById("countdown").innerHTML =
-        `Faltan ${hours}h ${minutes}m ${seconds}s para nuestra cita 😳💖`;
+        `Tienes ${hours}h ${minutes}m ${seconds}s para confirmar 🤭`;
 }
 
 setInterval(updateCountdown, 1000);
