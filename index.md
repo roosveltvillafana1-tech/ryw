@@ -126,16 +126,16 @@ button {
 <body>
 
 <div class="card">
-    <img src="IMG_0942.jpeg" class="photo">
+    <img src="bc11ea3c-b387-4662-a2b9-58ebbabbb327.jpeg" class="photo">
 
-    <h1>¿Quieres ser mi San Valentín? U3U 💖</h1>
+    <h1>¿Quieres ser mi San Valentín, Croqueta? U3U </h1>
     <p>Tendrás un día llena de tu música favorita y rica comida chiqui 🥰</p>
 
     <button class="music-btn" onclick="toggleMusic()">🎵 Activar música</button>
 
     <div class="buttons">
-        <button id="yes">Sí 💕</button>
-        <button id="no">No 🙈</button>
+        <button id="yes">Sí 🥰</button>
+        <button id="no">No 🧐💀</button>
     </div>
 
     <div id="result"></div>
@@ -177,10 +177,10 @@ yesBtn.addEventListener('click', () => {
     result.innerHTML = `
         <p style="margin-top:20px; font-weight:bold; color:white;">
             Buena elección jiji 😌💘<br>
-            Ahora oficialmente tienes el mejor plan del año 😎✨
+            No faltes uwu
         </p>
         <a class="whatsapp-btn" 
-           href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20💖" 
+           href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
            target="_blank">
            Enviar confirmación por WhatsApp 💌
         </a>
