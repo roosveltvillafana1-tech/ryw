@@ -151,7 +151,7 @@
                 Buena elección jiji, envía confirmación mejeje
             </p>
             <a class="whatsapp-btn" 
-               href="https://wa.me/51988096303?text=Confirmo%20mi%20cita%20de%20San%20Valent%C3%ADn%20uwu" 
+               href="https://wa.me/51988096303?text=Confirmo%20la%20salida%20de%20San%20Valent%C3%ADn%20uwu" 
                target="_blank">
                Enviar confirmación por WhatsApp 💌
             </a>
